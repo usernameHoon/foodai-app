@@ -1,7 +1,7 @@
 # SnapCal - 음식 이미지 기반 영양 분석 앱
 
 ## 1. 프로젝트 개요
-- **프로젝트 명칭**: SnapCal
+- **프로젝트 명칭**: FoodAI
 - **한 줄 소개**: 음식 사진 한 장으로 영양소와 칼로리를 분석하는 AI 기반 식단 관리 앱
 - **기술 스택**: React, Spring Boot, Flask (Python), MySQL, Chart.js, ResNet50 (PyTorch)
 
