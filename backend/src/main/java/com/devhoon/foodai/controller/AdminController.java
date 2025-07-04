@@ -1,9 +1,10 @@
 package com.devhoon.foodai.controller;
 
+import com.devhoon.foodai.dto.FoodAnalysisResultDTO;
 import com.devhoon.foodai.dto.UserDTO;
-import com.devhoon.foodai.entity.FoodAnalysisResult;
-import com.devhoon.foodai.repository.FoodAnalysisResultRepository;
 import com.devhoon.foodai.service.AdminService;
+import com.devhoon.foodai.service.FoodAnalysisResultService;
+
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -17,7 +18,7 @@ import java.util.Map;
 public class AdminController {
 
   private final AdminService adminService;
-  private final FoodAnalysisResultRepository foodAnalysisResultRepository;
+  private final FoodAnalysisResultService foodAnalysisResultService;
 
   @GetMapping("/users")
   public ResponseEntity<List<UserDTO>> getAllUsers(@RequestHeader("Authorization") String authHeader) {
@@ -32,8 +33,8 @@ public class AdminController {
   }
 
   @GetMapping("/logs")
-  public ResponseEntity<List<FoodAnalysisResult>> getAllLogs() {
-    List<FoodAnalysisResult> logs = foodAnalysisResultRepository.findAll();
+  public ResponseEntity<List<FoodAnalysisResultDTO>> getAllLogs() {
+    List<FoodAnalysisResultDTO> logs = foodAnalysisResultService.getAllLogs(); // ✅ DTO 리스트 반환
     return ResponseEntity.ok(logs);
   }
 }
