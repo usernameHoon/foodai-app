@@ -36,4 +36,12 @@ public class User {
 
   @Column(name = "joinDate", nullable = false)
   private LocalDateTime joinDate;
+
+  @Column(nullable = false)
+  @Builder.Default
+  private boolean isDeleted = false;
+
+  public void withdraw() {
+    this.isDeleted = true;
+  }
 }
