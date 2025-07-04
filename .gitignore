@@ -3,3 +3,5 @@
 
 ai-server/food101
 ai-server/app/static/uploads/
+ai-server/app/model/food101_full_training_with_prediction.ipynb
+ai-server/app/model/__pycache__/predict.cpython-311.pyc
