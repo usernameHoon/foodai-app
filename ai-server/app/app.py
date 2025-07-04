@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, url_for
 from flask_cors import CORS
 from model.predict import predict_food_image_min_weight
 import torch
@@ -6,9 +6,11 @@ import torchvision.transforms as transforms
 import pandas as pd
 import os
 from torchvision.models import resnet18
+from werkzeug.utils import secure_filename
+import uuid
 
 # Flask 앱 생성
-app = Flask(__name__)
+app = Flask(__name__, static_url_path="/static")
 CORS(app)
 
 # ─────────────────────────────
@@ -18,6 +20,8 @@ MODEL_DIR = os.path.join(BASE_DIR, "model")
 FOOD101_DIR = os.path.abspath(os.path.join(BASE_DIR, "..", "food101"))
 IMAGE_DIR = os.path.join(FOOD101_DIR, "images")
 META_DIR = os.path.join(FOOD101_DIR, "meta")
+UPLOAD_DIR = os.path.join(BASE_DIR, "static", "uploads")  # 이미지 저장 폴더
+os.makedirs(UPLOAD_DIR, exist_ok=True)  # 폴더 없으면 생성
 # ─────────────────────────────
 
 # 디바이스 설정
@@ -59,22 +63,33 @@ def predict():
         return jsonify({"error": "이미지 파일이 필요합니다"}), 400
 
     image = request.files["image"]
-    temp_path = os.path.join(BASE_DIR, f"temp_{image.filename}")
-    image.save(temp_path)
+
+    # ✅ 고유 파일명 생성
+    ext = os.path.splitext(image.filename)[1]
+    unique_filename = f"{uuid.uuid4().hex}{ext}"
+    save_path = os.path.join(UPLOAD_DIR, secure_filename(unique_filename))
+    image.save(save_path)
 
     try:
+        # 예측 수행
         result = predict_food_image_min_weight(
-            temp_path, model, nutrition_df, transform, idx_to_class, device
+            image_path=save_path,
+            model=model,
+            nutrition_df=nutrition_df,
+            inference_transform=transform,
+            idx_to_class=idx_to_class,
+            device=device,
         )
-        os.remove(temp_path)
 
         if "error" in result:
             return jsonify(result), 404
 
-        return jsonify(result)
+        # ✅ 결과에 imageUrl 포함
+        result["imageUrl"] = url_for(
+            "static", filename=f"uploads/{unique_filename}", _external=True
+        )
 
-    except Exception as e:
-        return jsonify({"error": str(e)}), 500
+        return jsonify(result)
 
     except Exception as e:
         return jsonify({"error": str(e)}), 500
