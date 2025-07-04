@@ -14,5 +14,10 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
   List<User> findAllByOrderByIdAsc();
 
-  long countByRoleNot(UserRole role); // "ADMIN" 제외한 사용자 수 카운트
+  long countByRoleAndIsDeletedFalse(UserRole role); // "ADMIN" 제외한 사용자 수 카운트
+
+  Optional<User> findByIdAndIsDeletedFalse(Long id);
+
+  Optional<User> findByEmailAndIsDeletedFalse(String email);
+
 }
