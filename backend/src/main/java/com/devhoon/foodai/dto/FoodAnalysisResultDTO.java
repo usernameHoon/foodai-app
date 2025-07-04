@@ -10,6 +10,8 @@ import lombok.*;
 public class FoodAnalysisResultDTO {
 
   private Long id;
+  private String userEmail;
+  private boolean userDeleted;
   private String label;
   private double calories;
   private double carbohydrates;
@@ -20,5 +22,5 @@ public class FoodAnalysisResultDTO {
   private double weight;
   private String analyzedAt;
   private String image;
-
+  private String imageUrl; // ✅ Flask에서 온 값
 }
