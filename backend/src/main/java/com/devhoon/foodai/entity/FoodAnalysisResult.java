@@ -16,7 +16,9 @@ public class FoodAnalysisResult {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
-  private String userEmail;
+  @ManyToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "user_id", nullable = false)
+  private User user;
 
   private String label;
   private double calories;
@@ -27,6 +29,7 @@ public class FoodAnalysisResult {
   private double sugars;
   private double weight;
   private String image;
+  private String imageUrl;
 
   private LocalDateTime analyzedAt;
 
