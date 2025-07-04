@@ -1,12 +1,16 @@
 package com.devhoon.foodai.service;
 
+import com.devhoon.foodai.config.JwtProvider;
 import com.devhoon.foodai.constant.UserRole;
+import com.devhoon.foodai.dto.LoginResponseDTO;
 import com.devhoon.foodai.dto.UserRequestDTO;
+import com.devhoon.foodai.dto.UserResponseDTO;
 import com.devhoon.foodai.entity.User;
 import com.devhoon.foodai.exception.AuthenticationFailedException;
 import com.devhoon.foodai.exception.DuplicateEmailException;
 import com.devhoon.foodai.repository.UserRepository;
 
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -20,6 +24,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class UserService {
 
+  private final JwtProvider jwtProvider;
   private final UserRepository userRepository;
   private final PasswordEncoder passwordEncoder;
 
@@ -45,16 +50,17 @@ public class UserService {
     userRepository.save(user);
   }
 
-  public User login(String email, String password) {
-
-    User user = userRepository.findByEmail(email)
-        .orElseThrow(() -> new AuthenticationFailedException("이메일이 존재하지 않습니다."));
+  public LoginResponseDTO login(String email, String password) {
+    User user = userRepository.findByEmailAndIsDeletedFalse(email)
+        .orElseThrow(() -> new AuthenticationFailedException("탈퇴한 사용자이거나 이메일이 존재하지 않습니다."));
 
     if (!passwordEncoder.matches(password, user.getPassword())) {
       throw new AuthenticationFailedException("비밀번호가 일치하지 않습니다.");
     }
 
-    return user;
+    String token = jwtProvider.generateToken(user.getEmail()); // JWT 발급
+
+    return new LoginResponseDTO(token, new UserResponseDTO(user));
   }
 
   public User authenticateUser(String email, String password) {
@@ -72,4 +78,10 @@ public class UserService {
     return null;
   }
 
+  @Transactional
+  public void withdrawUser(Long id) {
+    User user = userRepository.findByIdAndIsDeletedFalse(id)
+        .orElseThrow(() -> new RuntimeException("이미 탈퇴했거나 존재하지 않는 사용자입니다."));
+    user.withdraw(); // user.setIsDeleted(true)
+  }
 }
