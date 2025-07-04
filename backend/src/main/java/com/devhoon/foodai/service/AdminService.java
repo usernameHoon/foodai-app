@@ -1,10 +1,13 @@
 package com.devhoon.foodai.service;
 
+import com.devhoon.foodai.dto.FoodAnalysisResultDTO;
 import com.devhoon.foodai.dto.UserDTO;
 import com.devhoon.foodai.repository.UserRepository;
 import com.devhoon.foodai.repository.FoodAnalysisResultRepository;
 import com.devhoon.foodai.constant.UserRole;
 import lombok.RequiredArgsConstructor;
+
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -24,7 +27,7 @@ public class AdminService {
     Map<String, Object> stats = new HashMap<>();
 
     // 관리자를 제외한 사용자 수 카운트
-    long userCount = userRepository.countByRoleNot(UserRole.ADMIN);
+    long userCount = userRepository.countByRoleAndIsDeletedFalse(UserRole.USER);
 
     // 분석 요청 수 카운트
     long analysisCount = foodAnalysisResultRepository.count();
@@ -44,7 +47,7 @@ public class AdminService {
   public List<UserDTO> getAllUsers() {
     return userRepository.findAllByOrderByIdAsc()
         .stream()
-        .filter(user -> user.getRole() == UserRole.USER) // 일반 사용자만 필터링
+        .filter(user -> user.getRole() == UserRole.USER)
         .map(UserDTO::new)
         .collect(Collectors.toList());
   }
