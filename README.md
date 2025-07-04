@@ -50,7 +50,8 @@
 ---
 
 ## 6. 영양소 분석 및 추천 로직
-- 구현 예정
+- ✅ [영앙소 분석 코드](https://github.com/usernameHoon/foodai-app/blob/main/ai-server/app/model/predict.py)
+- ❌ 추천 로직 미구현
 
 ---
 
