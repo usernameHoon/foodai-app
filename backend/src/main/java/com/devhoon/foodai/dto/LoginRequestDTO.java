@@ -21,4 +21,7 @@ public class LoginRequestDTO {
 
   @NotBlank
   private String role; // 권한
+
+  @NotBlank
+  private boolean isDeleted;
 }
