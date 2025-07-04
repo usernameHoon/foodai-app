@@ -35,6 +35,8 @@ def predict_food_image_min_weight(
     print(f"🍬 당류: {min_row['sugars']}g")
     print(f"🧂 나트륨: {min_row['sodium']}mg")
 
+    image_url = f"http://localhost:5000/static/uploads/{label}.jpg"
+
     return {
         "label": label,
         "calories": float(min_row["calories"]),
@@ -44,4 +46,5 @@ def predict_food_image_min_weight(
         "sugars": float(min_row["sugars"]),
         "sodium": float(min_row["sodium"]),
         "weight": int(min_row["weight"]),
+        "imageUrl": image_url,
     }
