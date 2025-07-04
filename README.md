@@ -14,7 +14,7 @@
 ---
 
 ## 3. 시스템 아키텍처
-- **Frontend**: React (이미지 업로드, 결과 표시, 마이페이지)
+- **Frontend**: React (이미지 업로드, 결과 표시, 마이페이지) + TailwindCSS (디자인)
 - **Backend**: Spring Boot (DB 연동, 사용자, 기록 API)
 - **AI Server**: Flask + PyTorch (이미지 → 음식명 예측)
 - **Database**: MySQL (음식 DB, 기록 저장)
