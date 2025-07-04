@@ -52,5 +52,4 @@ public class FoodAnalysisResultController {
 
     return ResponseEntity.ok(dto);
   }
-
 }
