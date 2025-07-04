@@ -2,6 +2,7 @@ package com.devhoon.foodai.service;
 
 import com.devhoon.foodai.entity.User;
 import com.devhoon.foodai.repository.UserRepository;
+import com.devhoon.foodai.security.CustomUserDetails;
 
 import lombok.RequiredArgsConstructor;
 
@@ -20,13 +21,9 @@ public class CustomUserDetailsService implements UserDetailsService {
   @Override
   public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
 
-    User user = userRepository.findByEmail(email)
-        .orElseThrow(() -> new UsernameNotFoundException("사용자를 찾을 수 없습니다: " + email));
+    User user = userRepository.findByEmailAndIsDeletedFalse(email)
+        .orElseThrow(() -> new UsernameNotFoundException("탈퇴했거나 존재하지 않는 사용자입니다: " + email));
 
-    return org.springframework.security.core.userdetails.User.builder()
-        .username(user.getEmail())
-        .password(user.getPassword())
-        .roles("USER")
-        .build();
+    return new CustomUserDetails(user); // ✅ 커스텀 UserDetails 반환
   }
 }
