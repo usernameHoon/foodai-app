@@ -14,7 +14,7 @@
 ---
 
 ## 3. 시스템 아키텍처
-- **Frontend**: React (이미지 업로드, 결과 표시, 마이페이지)
+- **Frontend**: React (이미지 업로드, 결과 표시, 마이페이지) + TailwindCSS (디자인)
 - **Backend**: Spring Boot (DB 연동, 사용자, 기록 API)
 - **AI Server**: Flask + PyTorch (이미지 → 음식명 예측)
 - **Database**: MySQL (음식 DB, 기록 저장)
@@ -50,23 +50,44 @@
 ---
 
 ## 6. 영양소 분석 및 추천 로직
-- 구현 예정
+- ✅ [영앙소 분석 코드](https://github.com/usernameHoon/foodai-app/blob/main/ai-server/app/model/predict.py)
+- ❌ 추천 로직 미구현
 
 ---
 
-## 7. 시각화 예시 (Chart.js)
-- ✅ Bar Chart: 영양정보 표시
+## 7. 영양정보 시각화 (Chart.js 사용)
+- ✅ Bar Chart
+- ✅ Radar Chart
+- ✅ Line Chart
+- ✅ Doughnut Chart
 
 ---
 
 ## 8. 사용자 마이페이지 기능
 - ✅ 분석 이력 조회 및 결과 보기
+- ✅ 회원탈퇴 기능
 - ❌ 날짜 선택 → 특정 날짜 섭취 기록 표시
 - ❌ 기록별 삭제 기능
 - ❌ 권장량 설정 및 자동 비교 반영
+
 ---
 
-## 9. 회고 및 개선 사항
+## 9. 실행화면 (사용자 / 관리자)
+### 👤 사용자 화면
+> 음식 사진을 입력하고 예측 결과를 확인할 수 있는 사용자 UI입니다.
+> 
+![20250709_124101_내보내기](https://github.com/user-attachments/assets/9fafa655-72f6-48a5-bac0-a7ac35fe20fb)
+
+---
+
+### 🛠 관리자 화면
+> 등록된 회원 목록과 예측 이력을 관리할 수 있는 관리자용 페이지입니다.
+> 
+![실행화면](https://github.com/user-attachments/assets/9b49864f-e99b-4cff-b2ee-4ab83d2a8ba7)
+
+---
+
+## 10. 회고 및 개선 사항
 - ✅ 전 스택 통합 경험 (React ↔ Flask ↔ Spring ↔ DB)
 - ✅ CORS, 이미지 처리, 영양소 매칭 등 문제 해결 경험
 - 🔄 개선 방향:
@@ -76,7 +97,7 @@
 
 ---
 
-## 10. 향후 확장 계획
+## 11. 향후 확장 계획
 - ✅ 미구현 기능들 개발
 - ✅ 모바일 앱 연동 (React Native)
 - ✅ 식단 추천 알고리즘 AI 고도화
