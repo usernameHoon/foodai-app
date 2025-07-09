@@ -6,6 +6,8 @@ import com.devhoon.foodai.service.AdminService;
 import com.devhoon.foodai.service.FoodAnalysisResultService;
 
 import lombok.RequiredArgsConstructor;
+
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -33,8 +35,10 @@ public class AdminController {
   }
 
   @GetMapping("/logs")
-  public ResponseEntity<List<FoodAnalysisResultDTO>> getAllLogs() {
-    List<FoodAnalysisResultDTO> logs = foodAnalysisResultService.getAllLogs(); // ✅ DTO 리스트 반환
+  public ResponseEntity<Page<FoodAnalysisResultDTO>> getLogsPaged(
+      @RequestParam(name = "page", defaultValue = "1") int page,
+      @RequestParam(name = "size", defaultValue = "10") int size) {
+    Page<FoodAnalysisResultDTO> logs = foodAnalysisResultService.getLogsPaged(page - 1, size);
     return ResponseEntity.ok(logs);
   }
 }
