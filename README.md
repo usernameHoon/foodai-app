@@ -72,10 +72,11 @@
 ---
 
 ## 9. 실행화면 (사용자 / 관리자)
-![20250709_124101_내보내기](https://github.com/user-attachments/assets/9fafa655-72f6-48a5-bac0-a7ac35fe20fb)
-사용자
-![실행화면](https://github.com/user-attachments/assets/9b49864f-e99b-4cff-b2ee-4ab83d2a8ba7)
-관리자
+👤 사용자 화면
+> ![20250709_124101_내보내기](https://github.com/user-attachments/assets/9fafa655-72f6-48a5-bac0-a7ac35fe20fb)
+
+> ![실행화면](https://github.com/user-attachments/assets/9b49864f-e99b-4cff-b2ee-4ab83d2a8ba7)
+🛠 관리자 화면
 
 ---
 
