@@ -78,6 +78,8 @@
 > 
 ![20250709_124101_내보내기](https://github.com/user-attachments/assets/9fafa655-72f6-48a5-bac0-a7ac35fe20fb)
 
+---
+
 ### 🛠 관리자 화면
 > 등록된 회원 목록과 예측 이력을 관리할 수 있는 관리자용 페이지입니다.
 > 
