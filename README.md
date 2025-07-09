@@ -68,11 +68,11 @@
 - ❌ 날짜 선택 → 특정 날짜 섭취 기록 표시
 - ❌ 기록별 삭제 기능
 - ❌ 권장량 설정 및 자동 비교 반영
----
 
 ## 9. 실행화면 (사용자 / 관리자)
 > 추후 실행 화면(스크린샷)을 이곳에 추가할 예정입니다.
-
+![20250709_124101_내보내기](https://github.com/user-attachments/assets/9fafa655-72f6-48a5-bac0-a7ac35fe20fb)
+![실행화면](https://github.com/user-attachments/assets/9b49864f-e99b-4cff-b2ee-4ab83d2a8ba7)
 ---
 
 ## 10. 회고 및 개선 사항
